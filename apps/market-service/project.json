@@ -1,0 +1,74 @@
+{
+  "name": "market-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/market-service/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/market-service",
+        "main": "apps/market-service/src/main.ts",
+        "tsConfig": "apps/market-service/tsconfig.app.json",
+        "assets": [
+          "apps/market-service/src/assets"
+        ],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/market-service/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "market-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "market-service:build:development"
+        },
+        "production": {
+          "buildTarget": "market-service:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/market-service/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/market-service/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
