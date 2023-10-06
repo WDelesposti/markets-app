@@ -9,3 +9,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Market {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String
+  brand String
+  size  Float
+  unit  String
+}
+
+model Price {
+  id        Int      @id @default(autoincrement())
+  price     Float
+  date      DateTime
+  marketId  Int
+  productId Int
+}
