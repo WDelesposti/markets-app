@@ -1,7 +1,5 @@
-// src/main.ts
 
 import { NestFactory } from '@nestjs/core';
-//import { AppModule } from './app/app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { MarketsModule } from './markets/markets.module';
 
