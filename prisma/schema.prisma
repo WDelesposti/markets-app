@@ -16,17 +16,25 @@ model Market {
 }
 
 model Product {
-  id    Int    @id @default(autoincrement())
-  name  String
-  brand String
-  size  Float
-  unit  String
+  id          Int    @id @default(autoincrement())
+  name        String
+  brand       String
+  size        String
+  measurement String
 }
 
 model Price {
-  id        Int      @id @default(autoincrement())
-  price     Float
-  date      DateTime
-  marketId  Int
-  productId Int
+  id           Int            @id @default(autoincrement())
+  price        Float
+  date         DateTime
+  marketId     Int
+  productId    Int
+  ShoppingList ShoppingList[]
+}
+
+model ShoppingList {
+  id        Int   @id @default(autoincrement())
+  priceList Price @relation(fields: [priceId], references: [id])
+  quantity  Float
+  priceId   Int
 }
