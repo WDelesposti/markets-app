@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { MarketsService } from './markets.service';
-import { CreateMarketDto } from './dto/create-market.dto';
-import { UpdateMarketDto } from './dto/update-market.dto';
+import { MarketsService } from '../services/markets.service';
+import { CreateMarketDto } from '../dto/create-market.dto';
+import { UpdateMarketDto } from '../dto/update-market.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { MarketEntity } from './entities/market.entity';
+import { MarketEntity } from '../entities/market.entity';
 
 @Controller('markets')
 @ApiTags('markets')
