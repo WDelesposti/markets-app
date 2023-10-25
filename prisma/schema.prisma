@@ -19,7 +19,7 @@ model Product {
   id          Int    @id @default(autoincrement())
   name        String
   brand       String
-  size        String
+  size        Float
   measurement String
 }
 
