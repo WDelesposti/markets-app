@@ -15,6 +15,10 @@ export class ProductService {
     return this.prisma.product.findMany();
   }
 
+  findOneByName(name: string) {
+    return this.prisma.product.findMany({where: {name: {contains: name, mode: 'insensitive'}}});
+  }
+
   findOne(id: number) {
     return this.prisma.product.findUnique({where: {id}});
   }

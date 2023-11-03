@@ -22,6 +22,12 @@ export class ProductController {
     return this.productService.findAll();
   }
 
+  @Get(':name')
+  @ApiOkResponse({ type: ProductEntity })
+  findOneByName(@Param('name') name: string) {
+    return this.productService.findOneByName(name);
+  }
+
   @Get(':id')
   @ApiOkResponse({ type: ProductEntity })
   findOne(@Param('id') id: string) {
