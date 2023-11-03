@@ -2,9 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePriceDto {
   @ApiProperty()
-  id: number;
-
-  @ApiProperty()
   price: number;
 
   @ApiProperty()
