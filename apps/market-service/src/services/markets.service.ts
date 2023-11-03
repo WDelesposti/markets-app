@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateMarketDto } from '../dto/create-market.dto';
 import { UpdateMarketDto } from '../dto/update-market.dto';
 import { PrismaService } from '../prisma/prisma.service';
@@ -8,6 +8,9 @@ export class MarketsService {
   constructor(private prisma: PrismaService){}
   
   create(createMarketDto: CreateMarketDto) {
+    if (createMarketDto.name === '') {
+      throw new Error('Market name cannot be empty');
+    }
     return this.prisma.market.create({data: createMarketDto});
   }
   
@@ -23,11 +26,19 @@ export class MarketsService {
     return this.prisma.market.findMany({where: {name: {contains: name, mode: 'insensitive'}}});
   }
 
-  update(id: number, updateMarketDto: UpdateMarketDto) {
+  async update(id: number, updateMarketDto: UpdateMarketDto) {
+    const market = await this.prisma.market.findUnique({where: {id}});
+    if (!market) {
+      throw new HttpException('Market not found', HttpStatus.NOT_FOUND);
+    }
     return this.prisma.market.update({where: {id}, data: updateMarketDto});
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const market = await this.prisma.market.findUnique({where: {id}});
+    if (!market) {
+      throw new HttpException('Market not found', HttpStatus.NOT_FOUND);
+    }
     return this.prisma.market.delete({where: {id}});
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { MarketsService } from '../services/markets.service';
 import { CreateMarketDto } from '../dto/create-market.dto';
 import { UpdateMarketDto } from '../dto/update-market.dto';
@@ -13,7 +13,11 @@ export class MarketsController {
   @Post()
   @ApiCreatedResponse({ type: MarketEntity })
   create(@Body() createMarketDto: CreateMarketDto) {
-    return this.marketsService.create(createMarketDto);
+    try {
+      return this.marketsService.create(createMarketDto);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
@@ -44,6 +48,10 @@ export class MarketsController {
   @Delete(':id')
   @ApiOkResponse({ type: MarketEntity })
   remove(@Param('id') id: string) {
-    return this.marketsService.remove(+id);
+    try {
+      return this.marketsService.remove(+id);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 }
