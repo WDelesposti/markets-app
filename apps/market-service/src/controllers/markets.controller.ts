@@ -22,6 +22,13 @@ export class MarketsController {
     return this.marketsService.findAll();
   }
 
+  @Get(':name')
+  @ApiOkResponse({ type: MarketEntity })
+  findOneByName(@Param('name') name: string) {
+    return this.marketsService.findOneByName(name);
+  }
+  
+
   @Get(':id')
   @ApiOkResponse({ type: MarketEntity })
   findOne(@Param('id') id: string) {

@@ -10,13 +10,17 @@ export class MarketsService {
   create(createMarketDto: CreateMarketDto) {
     return this.prisma.market.create({data: createMarketDto});
   }
-
+  
   findAll() {
     return this.prisma.market.findMany();
   }
-
+  
   findOne(id: number) {
     return this.prisma.market.findUnique({where: {id}});
+  }
+  
+  findOneByName(name: string) {
+    return this.prisma.market.findMany({where: {name: {contains: name, mode: 'insensitive'}}});
   }
 
   update(id: number, updateMarketDto: UpdateMarketDto) {
