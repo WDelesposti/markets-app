@@ -11,7 +11,7 @@ export class CreateProductDto {
   brand: string;
 
   @ApiProperty()
-  size: string;
+  size: number;
 
   @ApiProperty()
   measurement: string;

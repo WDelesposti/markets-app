@@ -12,7 +12,7 @@ export class ProductEntity implements Product {
   brand: string;
 
   @ApiProperty()
-  size: string;
+  size: number;
 
   @ApiProperty()
   measurement: string;

@@ -16,9 +16,6 @@
         "outputPath": "dist/apps/market-service",
         "main": "apps/market-service/src/main.ts",
         "tsConfig": "apps/market-service/tsconfig.app.json",
-        "assets": [
-          "apps/market-service/src/assets"
-        ],
         "isolatedConfig": true,
         "webpackConfig": "apps/market-service/webpack.config.js"
       },
