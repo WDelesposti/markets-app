@@ -1,42 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-function FrontendComponent() {
-  const [data, setData] = useState<Array<any> | null>(null);
+function MarketSearch() {
+  const [searchName, setSearchName] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    async function fetchDataFromBackend() {
-      try {
-        const response = await axios.get('http://192.168.0.123:3000/markets');
-        if (response) {
-          setData(response.data);
-        } else {
-          console.error('Error fetching data:', response);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/markets/${searchName}`);
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error('Error:', error);
     }
-
-    fetchDataFromBackend();
-  }, []);
+  };
 
   return (
     <div>
-      {data ? (
-        <div>
-        {data.map((item) => (
-          <div key={item.id}>
-            <p>ID: {item.id}</p>
-            <p>Name: {item.name}</p>
-          </div>
-        ))}
-      </div>
-      ) : (
-        <p>Loading data...</p>
+      <h1>Market Search</h1>
+      <input
+        type="text"
+        placeholder="Enter market name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
+
+      {searchResults.length > 0 && (
+        <ul>
+          {searchResults.map((result:any) => (
+            <li key={result.id}>{result.name}</li>
+          ))}
+        </ul>
       )}
     </div>
   );
 }
 
-export default FrontendComponent;
+export default MarketSearch;
