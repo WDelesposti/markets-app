@@ -2,9 +2,11 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { MarketsModule } from './modules/markets.module';
+import cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(MarketsModule);
+  app.use(cors());
 
   const config = new DocumentBuilder()
     .setTitle('market-service')

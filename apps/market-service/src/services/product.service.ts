@@ -8,6 +8,18 @@ export class ProductService {
   constructor(private prisma: PrismaService){}
   
   create(createProductDto: CreateProductDto) {
+    if (createProductDto.name === '') {
+      throw new Error('Product name cannot be empty');
+    }
+    if (createProductDto.brand === '') {
+      throw new Error('Brand cannot be empty');
+    }
+    if (createProductDto.size === 0) {
+      throw new Error('Size cannot be zero');
+    }
+    if (createProductDto.measurement === '') {
+      throw new Error('Measurement cannot be empty');
+    }
     return this.prisma.product.create({data: createProductDto});
   }
 
