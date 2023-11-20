@@ -14,7 +14,9 @@
     "@expo/metro-config": "*",
     "react-native-svg-transformer": "*",
     "react": "*",
-    "axios": "*"
+    "axios": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/stack": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/front && cp package-lock.json apps/front",
