@@ -7,9 +7,14 @@ import { PrismaService } from '../prisma/prisma.service';
 export class MarketsService {
   constructor(private prisma: PrismaService){}
   
-  create(createMarketDto: CreateMarketDto) {
+  async create(createMarketDto: CreateMarketDto) {
     if (createMarketDto.name === '') {
       throw new Error('Market name cannot be empty');
+    }
+
+    const exist = await this.findOneByName(createMarketDto.name)
+    if (exist.length > 0) {
+      throw new HttpException('Market name already exist', HttpStatus.CONFLICT);
     }
     return this.prisma.market.create({data: createMarketDto});
   }
