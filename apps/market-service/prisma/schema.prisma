@@ -12,7 +12,7 @@ datasource db {
 
 model Market {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
 }
 
 model Product {
