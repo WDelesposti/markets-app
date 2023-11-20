@@ -1,39 +1,33 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+// App.tsx - Ponto de entrada para a aplicação React Native Expo em TypeScript
 
-function MarketSearch() {
-  const [searchName, setSearchName] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+// Importar módulos necessários
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/markets/${searchName}`);
-      setSearchResults(response.data);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+// Importar telas personalizadas
+import Home from './pages/home';
+import Search from './pages/search';
+import Prices from './pages/prices';
+import Markets from './pages/markets';
+import Products from './pages/products';
 
+// Criar um navegador de pilha
+const Stack = createStackNavigator();
+
+// Componente principal contendo o contêiner de navegação e o navegador de pilha
+const App = () => {
   return (
-    <div>
-      <h1>Market Search</h1>
-      <input
-        type="text"
-        placeholder="Enter market name"
-        value={searchName}
-        onChange={(e) => setSearchName(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-
-      {searchResults.length > 0 && (
-        <ul>
-          {searchResults.map((result:any) => (
-            <li key={result.id}>{result.name}</li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Prices" component={Prices} />
+        <Stack.Screen name="Products" component={Products} />
+        <Stack.Screen name="Markets" component={Markets} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-export default MarketSearch;
+export default App;
