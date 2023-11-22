@@ -16,7 +16,8 @@
     "react": "*",
     "axios": "*",
     "@react-navigation/native": "*",
-    "@react-navigation/stack": "*"
+    "@react-navigation/stack": "*",
+    "@react-native-picker/picker": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/front && cp package-lock.json apps/front",
