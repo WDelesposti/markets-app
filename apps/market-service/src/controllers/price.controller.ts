@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
 import { PriceService } from '../services/price.service';
 import { CreatePriceDto } from '../dto/create-price.dto';
 import { UpdatePriceDto } from '../dto/update-price.dto';
@@ -13,6 +13,22 @@ export class PriceController {
   @Post()
   @ApiCreatedResponse({ type: PriceEntity })
   create(@Body() createPriceDto: CreatePriceDto) {
+    if (createPriceDto.price === 0) {
+      throw new HttpException('Price cannot be zero', 400);
+    }
+
+    if (createPriceDto.date === null) {
+      throw new HttpException('Date cannot be null', 400);
+    }
+
+    if (createPriceDto.marketId === 0) {
+      throw new HttpException('Market cannot be zero', 400);
+    }
+
+    if (createPriceDto.productId === 0) {
+      throw new HttpException('Product cannot be zero', 400);
+    }
+    
     return this.priceService.create(createPriceDto);
   }
 
