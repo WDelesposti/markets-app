@@ -21,6 +21,8 @@ model Product {
   brand       String
   size        Float
   measurement String
+
+  @@unique([name, brand])
 }
 
 model Price {
