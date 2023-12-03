@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { ProductService } from '../services/product.service';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
@@ -12,7 +12,7 @@ export class ProductController {
 
   @Post()
   @ApiCreatedResponse({ type: ProductEntity })
-  create(@Body() createProductDto: CreateProductDto) {
+  create(@Query() createProductDto: CreateProductDto) {
     try {
       return this.productService.create(createProductDto);
     } catch (error) {
@@ -30,6 +30,15 @@ export class ProductController {
   @ApiOkResponse({ type: ProductEntity })
   findOneByName(@Param('name') name: string) {
     return this.productService.findOneByName(name);
+  }
+
+  @Get(':name/:brand')
+  @ApiOkResponse({ type: ProductEntity })
+  findOneByNameAndBrand(
+    @Param('name') name: string,
+    @Param('brand') brand: string,
+  ) {
+    return this.productService.findOneByNameAndBrand(name, brand);
   }
 
   @Get(':id')
