@@ -32,13 +32,14 @@ const Markets = () => {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
       }}
     >
       <Text
         style={{
           fontSize: 24,
           fontWeight: 'bold',
+          marginTop: 16,
         }}
       >
         Criação de Mercado
@@ -57,6 +58,7 @@ const Markets = () => {
           borderWidth: 1,
           marginTop: 16,
           marginBottom: 16,
+          margin: 16,
         }}
       />
 
