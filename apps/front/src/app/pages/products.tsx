@@ -9,16 +9,10 @@ const Products = () => {
   const [measurement, setMeasurement] = useState('');
 
   const handleSubmit = () => {
-    const apiUrl = 'http://0.0.0.0:3000/product';
-    const postData = {
-      name: name,
-      brand: brand,
-      size: Number(size),
-      measurement: measurement,
-    };
+    const apiUrl = `http://0.0.0.0:3000/product?name=${name}&brand=${brand}&size=${size}&measurement=${measurement}`;
 
     axios
-      .post(apiUrl, postData)
+      .post(apiUrl)
       .then(() => {
         alert('Dados enviados com sucesso!');
       })
