@@ -38,6 +38,12 @@ export class PriceController {
     return this.priceService.findAll();
   }
 
+  @Get(':productId')
+  @ApiOkResponse({ type: [PriceEntity] })
+  findManyByProductId(@Param('productId') productId: string) {
+    return this.priceService.findManyByProductId(+productId);
+  }
+
   @Get(':id')
   @ApiOkResponse({ type: PriceEntity })
   findOne(@Param('id') id: string) {
