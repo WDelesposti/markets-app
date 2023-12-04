@@ -34,8 +34,6 @@ const Prices = () => {
       price: Number(formattedPrice),
     };
 
-    console.log(postData);
-
     axios
     .post(apiUrl, postData)
     .then(() => {
