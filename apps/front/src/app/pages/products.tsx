@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
 
 const Products = () => {
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
   const [size, setSize] = useState('');
   const [measurement, setMeasurement] = useState('');
+
+  const Measurement = ['L', 'ML', 'G', 'MG', 'KG', 'UN', 'PCT', 'CX'];
 
   const handleSubmit = () => {
     const apiUrl = `http://0.0.0.0:3000/product?name=${name}&brand=${brand}&size=${size}&measurement=${measurement}`;
@@ -90,11 +93,9 @@ const Products = () => {
           margin: 10,
         }}
       />
-      <TextInput
-        placeholder="Measurement"
-        placeholderTextColor="gray"
-        value={measurement}
-        onChangeText={setMeasurement}
+       <Picker
+        selectedValue={measurement}
+        onValueChange={(itemValue, itemIndex) => setMeasurement(itemValue)}
         style={{
           width: '50%',
           height: 40,
@@ -104,7 +105,14 @@ const Products = () => {
           marginBottom: 16,
           margin: 10,
         }}
-      />
+      >
+        <Picker.Item label="Select a measurement" value="" />
+        {Measurement.map((item, index) => {
+          return <Picker.Item label={item} value={item} key={index} />;
+        })}
+      </Picker>
+
+
       <Button title="Submit" onPress={handleSubmit} color={'#000'} />
     </View>
   );
