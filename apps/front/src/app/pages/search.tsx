@@ -25,7 +25,8 @@ const Search = () => {
     }
     const minPrice = Math.min(...prices);
     const maxPrice = Math.max(...prices);
-    const averagePrice = prices.reduce((a: number, b: number) => a + b) / prices.length;
+    const averagePrice =
+      prices.reduce((a: number, b: number) => a + b) / prices.length;
     setSearchResults([minPrice, maxPrice, averagePrice]);
   };
 
@@ -77,11 +78,39 @@ const Search = () => {
       </datalist>
 
       {searchResults.length > 0 && (
-        <div>
-            <p>Preço mínimo: {searchResults[0]}</p>
-            <p>Preço máximo: {searchResults[1]}</p>
-            <p>Preço médio: {searchResults[2]}</p>
-        </div>
+        <View
+          style={{
+            margin: 10,
+            padding: 10,
+            backgroundColor: '#f0f0f0',
+            borderRadius: 5,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+            }}
+          >
+            Preço mínimo: {searchResults[0]}
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+            }}
+          >
+            Preço máximo: {searchResults[1]}
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+            }}
+          >
+            Preço médio: {searchResults[2]}
+          </Text>
+        </View>
       )}
     </View>
   );
