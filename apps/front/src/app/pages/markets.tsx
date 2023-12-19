@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import axios from 'axios';
 
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 const Markets = () => {
   const [inputValue, setInputValue] = useState('');
 
   const handlePost = () => {
-    const apiUrl = 'http://0.0.0.0:3000/markets';
+    const apiUrl = `${API_URL}/markets`;
     const postData = {
       name: inputValue,
     };
@@ -45,7 +47,6 @@ const Markets = () => {
         Criação de Mercado
       </Text>
 
-      {/* Campo de texto para inserção de string */}
       <TextInput
         placeholder="Digite o nome do mercado que deseja inserir"
         placeholderTextColor="gray"
@@ -62,7 +63,6 @@ const Markets = () => {
         }}
       />
 
-      {/* Botão para realizar a inserção */}
       <Button title="Inserir" onPress={handlePost} color={'#000'}></Button>
     </View>
   );

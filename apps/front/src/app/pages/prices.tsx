@@ -1,12 +1,12 @@
-// Import necessary modules from React and React Native
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios'; // Import axios for making API requests
+import axios from 'axios';
 import { formatPrice, maskDate, formatStringToDate } from './utils';
-// Functional component Prices
+
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 const Prices = () => {
-  // State variables to store data from the API
   const [products, setProducts] = useState([]);
   const [markets, setMarkets] = useState([]);
   const [productSelected, setProductSelected] = useState('');
@@ -16,17 +16,17 @@ const Prices = () => {
 
 
   const handleDateInput = (input: string) => {
-    const formattedDate = maskDate(input); // Use the utility function to apply the mask
-    setMaskedDate(formattedDate); // Update the state with the masked date
+    const formattedDate = maskDate(input);
+    setMaskedDate(formattedDate);
   };
 
   const handlePriceInput = (input: string) => {
-    const formattedFloat = formatPrice(input); // Use the utility function
-    setFormattedPrice(formattedFloat); // Update the state with the formatted float
+    const formattedFloat = formatPrice(input);
+    setFormattedPrice(formattedFloat);
   };
 
   const handleSubmit = () => {
-    const apiUrl = 'http://0.0.0.0:3000/price';
+    const apiUrl = `${API_URL}/price`;
     const postData = {
       productId: Number(productSelected),
       marketId: Number(marketSelected),
@@ -50,22 +50,18 @@ const Prices = () => {
     });
   }
 
-  // useEffect hook to fetch data when the component mounts
   useEffect(() => {
-    // Fetch products from the API and update the state
     axios
-      .get('http://0.0.0.0:3000/product')
+      .get(`${API_URL}/product`)
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching products:', error));
 
-    // Fetch markets from the API and update the state
     axios
-      .get('http://0.0.0.0:3000/markets')
+      .get(`${API_URL}/markets`)
       .then((response) => setMarkets(response.data))
       .catch((error) => console.error('Error fetching markets:', error));
   }, []);
 
-  // Render method
   return (
     <View
       style={{

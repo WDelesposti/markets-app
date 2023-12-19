@@ -3,6 +3,8 @@ import { View, TextInput, Button, Text } from 'react-native';
 import axios from 'axios';
 import { Picker } from '@react-native-picker/picker';
 
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 const Products = () => {
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
@@ -12,7 +14,7 @@ const Products = () => {
   const Measurement = ['L', 'ML', 'G', 'MG', 'KG', 'UN', 'PCT', 'CX'];
 
   const handleSubmit = () => {
-    const apiUrl = `http://0.0.0.0:3000/product?name=${name}&brand=${brand}&size=${size}&measurement=${measurement}`;
+    const apiUrl = `${API_URL}/product?name=${name}&brand=${brand}&size=${size}&measurement=${measurement}`;
 
     axios
       .post(apiUrl)

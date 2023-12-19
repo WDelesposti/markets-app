@@ -17,6 +17,7 @@
     "axios": "*",
     "@react-navigation/native": "*",
     "@react-navigation/stack": "*",
+    "dotenv": "*",
     "@react-native-picker/picker": "*"
   },
   "scripts": {

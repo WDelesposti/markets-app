@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import Home from './home';
+import axios from 'axios';
 
-const AuthScreen =  ({navigation}: {navigation: any}) => {
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
+const AuthScreen = ({ navigation }: { navigation: any }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    // You can add your authentication logic here.
-    // For simplicity, I'll just check if the username and password are not empty.
     if (username && password) {
-      setLoggedIn(true);
+      const apiUrl = `${API_URL}/login`;
+      const postData = {
+        email: username,
+        password: password,
+      };
+      axios
+        .post(apiUrl, postData)
+        .then(() => {
+          setLoggedIn(true);
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+        });
     } else {
       alert('Please enter both username and password.');
     }

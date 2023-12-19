@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
 
+const API_URL = process.env.API_URL || 'http://localhost:3000';
+
 const Search = () => {
   const [products, setProducts] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -16,7 +18,7 @@ const Search = () => {
     const product = products.find(
       (product: any) => product.name === searchTerm
     );
-    const apiUrl = `http://0.0.0.0:3000/price/${product.id}`;
+    const apiUrl = `${API_URL}/price/${product.id}`;
     const response = await axios.get(apiUrl);
     const prices = response.data.map((price: any) => price.price);
     if (prices.length === 0) {
@@ -32,7 +34,7 @@ const Search = () => {
 
   useEffect(() => {
     axios
-      .get('http://0.0.0.0:3000/product')
+      .get(`${API_URL}/product`)
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching products:', error));
   }, []);
