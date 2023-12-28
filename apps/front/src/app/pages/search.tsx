@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
+import moment from 'moment';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
@@ -20,16 +21,37 @@ const Search = () => {
     );
     const apiUrl = `${API_URL}/price/${product.id}`;
     const response = await axios.get(apiUrl);
-    const prices = response.data.map((price: any) => price.price);
+    const prices = response.data.map((price: any) => {
+      return {
+        price: price.price,
+        date: moment(price.date).format('DD/MM/YYYY'),
+      };
+    });
     if (prices.length === 0) {
       alert('Nenhum resultado encontrado.');
       return;
     }
-    const minPrice = Math.min(...prices);
-    const maxPrice = Math.max(...prices);
-    const averagePrice =
-      prices.reduce((a: number, b: number) => a + b) / prices.length;
-    setSearchResults([minPrice, maxPrice, averagePrice]);
+    const minPrice = Math.min(
+      ...prices.map((price: any) => price.price)
+    ).toFixed(2);
+
+    const maxPrice = Math.max(
+      ...prices.map((price: any) => price.price)
+    ).toFixed(2);
+
+    const averagePrice = (
+      prices.reduce((acc: number, price: any) => {
+        return acc + price.price;
+      }, 0) / prices.length
+    ).toFixed(2);
+
+    const newestPrice = prices
+      .reduce((acc: any, price: any) => {
+        return moment(acc.date).isAfter(moment(price.date)) ? acc : price;
+      }, prices[0])
+      
+
+    setSearchResults([minPrice, maxPrice, averagePrice, newestPrice]);
   };
 
   useEffect(() => {
@@ -94,7 +116,7 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço mínimo: {searchResults[0]}
+            Preço mínimo: R$ {searchResults[0]}
           </Text>
           <Text
             style={{
@@ -102,7 +124,7 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço máximo: {searchResults[1]}
+            Preço máximo: R$ {searchResults[1]}
           </Text>
           <Text
             style={{
@@ -110,7 +132,16 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço médio: {searchResults[2]}
+            Preço médio: R$ {searchResults[2]}
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              marginBottom: 8,
+            }}
+          >
+            Preço mais recente: R$ {searchResults[3].price.toFixed(2)} (
+            {searchResults[3].date})
           </Text>
         </View>
       )}

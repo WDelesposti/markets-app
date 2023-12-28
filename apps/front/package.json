@@ -18,7 +18,8 @@
     "@react-navigation/native": "*",
     "@react-navigation/stack": "*",
     "dotenv": "*",
-    "@react-native-picker/picker": "*"
+    "@react-native-picker/picker": "*",
+    "moment": "*"
   },
   "scripts": {
     "eas-build-pre-install": "cd ../../ && node tools/scripts/eas-build-pre-install.mjs . apps/front && cp package-lock.json apps/front",
