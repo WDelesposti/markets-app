@@ -25,19 +25,20 @@ const Search = () => {
       return {
         price: price.price,
         date: moment(price.date).format('DD/MM/YYYY'),
+        marketName: price.marketName,
       };
     });
     if (prices.length === 0) {
       alert('Nenhum resultado encontrado.');
       return;
     }
-    const minPrice = Math.min(
-      ...prices.map((price: any) => price.price)
-    ).toFixed(2);
+    const minPrice = prices.reduce((acc: any, price: any) => {
+      return price.price < acc.price ? price : acc;
+    }, prices[0]);
 
-    const maxPrice = Math.max(
-      ...prices.map((price: any) => price.price)
-    ).toFixed(2);
+    const maxPrice = prices.reduce((acc: any, price: any) => {
+      return price.price > acc.price ? price : acc;
+    }, prices[0]);
 
     const averagePrice = (
       prices.reduce((acc: number, price: any) => {
@@ -45,11 +46,9 @@ const Search = () => {
       }, 0) / prices.length
     ).toFixed(2);
 
-    const newestPrice = prices
-      .reduce((acc: any, price: any) => {
-        return moment(acc.date).isAfter(moment(price.date)) ? acc : price;
-      }, prices[0])
-      
+    const newestPrice = prices.reduce((acc: any, price: any) => {
+      return moment(acc.date).isAfter(moment(price.date)) ? acc : price;
+    }, prices[0]);
 
     setSearchResults([minPrice, maxPrice, averagePrice, newestPrice]);
   };
@@ -116,7 +115,8 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço mínimo: R$ {searchResults[0]}
+            Preço mínimo: R$ {searchResults[0].price.toFixed(2)} - {''}
+            {searchResults[0].date} - {searchResults[0].marketName}
           </Text>
           <Text
             style={{
@@ -124,7 +124,8 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço máximo: R$ {searchResults[1]}
+            Preço máximo: R$ {searchResults[1].price.toFixed(2)} - {''}
+            {searchResults[1].date} - {searchResults[1].marketName}
           </Text>
           <Text
             style={{
@@ -140,8 +141,8 @@ const Search = () => {
               marginBottom: 8,
             }}
           >
-            Preço mais recente: R$ {searchResults[3].price.toFixed(2)} (
-            {searchResults[3].date})
+            Preço mais recente: R$ {searchResults[3].price.toFixed(2)} - {''}
+            {searchResults[3].date} - {searchResults[3].marketName}
           </Text>
         </View>
       )}

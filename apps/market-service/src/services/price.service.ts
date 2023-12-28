@@ -15,8 +15,31 @@ export class PriceService {
     return this.prisma.price.findMany();
   }
 
-  findManyByProductId(productId: number) {
-    return this.prisma.price.findMany({ where: { productId } });
+  async findManyByProductId(productId: number) {
+    const prices = await this.prisma.price.findMany({
+      where: { productId },
+    });
+
+    const marketIds = prices.map((price) => price.marketId);
+
+    const markets = await this.prisma.market.findMany({
+      where: {
+        id: { in: marketIds },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    const marketMap = new Map(markets.map((market) => [market.id, market]));
+
+    const result = prices.map((price) => ({
+      ...price,
+      marketName: marketMap.get(price.marketId)?.name || null,
+    }));
+
+    return result;
   }
 
   findOne(id: number) {
