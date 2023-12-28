@@ -6,14 +6,17 @@ import { formatPrice, maskDate, formatStringToDate } from './utils';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
-const Prices = () => {
+const Prices = (navigation: any) => {
   const [products, setProducts] = useState([]);
   const [markets, setMarkets] = useState([]);
   const [productSelected, setProductSelected] = useState('');
   const [marketSelected, setMarketSelected] = useState('');
   const [maskedDate, setMaskedDate] = useState<string>('');
   const [formattedPrice, setFormattedPrice] = useState<string>('');
-
+  const token = navigation.route.params.token;
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   const handleDateInput = (input: string) => {
     const formattedDate = maskDate(input);
@@ -35,29 +38,29 @@ const Prices = () => {
     };
 
     axios
-    .post(apiUrl, postData)
-    .then(() => {
-      alert('Dados enviados com sucesso!');
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 409) {
-        alert('Dados já existentes. Por favor, escolha outro valor.');
-      } else {
-        alert(
-          'Ocorreu um erro ao enviar os dados. Tente novamente mais tarde.'
-        );
-      }
-    });
-  }
+      .post(apiUrl, postData, config)
+      .then(() => {
+        alert('Dados enviados com sucesso!');
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 409) {
+          alert('Dados já existentes. Por favor, escolha outro valor.');
+        } else {
+          alert(
+            'Ocorreu um erro ao enviar os dados. Tente novamente mais tarde.'
+          );
+        }
+      });
+  };
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/product`)
+      .get(`${API_URL}/product`, config)
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching products:', error));
 
     axios
-      .get(`${API_URL}/markets`)
+      .get(`${API_URL}/markets`, config)
       .then((response) => setMarkets(response.data))
       .catch((error) => console.error('Error fetching markets:', error));
   }, []);

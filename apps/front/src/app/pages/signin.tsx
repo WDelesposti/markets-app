@@ -8,6 +8,7 @@ const AuthScreen = ({ navigation }: { navigation: any }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [token, setToken] = useState('');
 
   const handleLogin = () => {
     if (username && password) {
@@ -18,7 +19,8 @@ const AuthScreen = ({ navigation }: { navigation: any }) => {
       };
       axios
         .post(apiUrl, postData)
-        .then(() => {
+        .then((response) => {
+          setToken(response.data.access_token);
           setLoggedIn(true);
         })
         .catch((error) => {
@@ -32,7 +34,7 @@ const AuthScreen = ({ navigation }: { navigation: any }) => {
   return (
     <div>
       {loggedIn ? (
-        <Home navigation={navigation} />
+        <Home navigation={navigation} token={token} />
       ) : (
         <div>
           <h2>Login</h2>

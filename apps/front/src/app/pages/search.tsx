@@ -5,10 +5,14 @@ import moment from 'moment';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
-const Search = () => {
+const Search = (navigation: any) => {
   const [products, setProducts] = useState<any>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [searchResults, setSearchResults] = useState<any>([]);
+  const token = navigation.route.params.token;
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -20,7 +24,7 @@ const Search = () => {
       (product: any) => product.name === searchTerm
     );
     const apiUrl = `${API_URL}/price/${product.id}`;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get(apiUrl, config);
     const prices = response.data.map((price: any) => {
       return {
         price: price.price,
@@ -55,10 +59,10 @@ const Search = () => {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/product`)
+      .get(`${API_URL}/product`, config)
       .then((response) => setProducts(response.data))
       .catch((error) => console.error('Error fetching products:', error));
-  }, []);
+  });
 
   return (
     <View
@@ -95,7 +99,7 @@ const Search = () => {
       <datalist id="resultsList">
         {products.map((result: any, index: React.Key | null | undefined) => (
           <option key={index} value={result.name}>
-            {result.brand}
+            {result.brand} - {result.size} {result.measurement}
           </option>
         ))}
       </datalist>

@@ -16,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="AuthScreen">
         <Stack.Screen name="App" component={AuthScreen} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home as any} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Prices" component={Prices} />
         <Stack.Screen name="Products" component={Products} />

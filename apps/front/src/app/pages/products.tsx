@@ -5,11 +5,15 @@ import { Picker } from '@react-native-picker/picker';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
-const Products = () => {
+const Products = (navigation: any) => {
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
   const [size, setSize] = useState('');
   const [measurement, setMeasurement] = useState('');
+  const token = navigation.route.params.token;
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   const Measurement = ['L', 'ML', 'G', 'MG', 'KG', 'UN', 'PCT', 'CX'];
 
@@ -17,7 +21,7 @@ const Products = () => {
     const apiUrl = `${API_URL}/product?name=${name}&brand=${brand}&size=${size}&measurement=${measurement}`;
 
     axios
-      .post(apiUrl)
+      .post(apiUrl,{}, config)
       .then(() => {
         alert('Dados enviados com sucesso!');
       })

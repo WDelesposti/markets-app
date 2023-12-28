@@ -7,12 +7,12 @@ import {
   View,
   Text,
   StatusBar,
-  TouchableOpacity,
+  Pressable,
   Linking,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-export const Home = ({navigation}: {navigation: any}) => {
+export const Home = ( { navigation, token }: { navigation: any, token:string }) => {
   const [, setWhatsNextYCoord] = useState<number>(0);
   const scrollViewRef = useRef<null | ScrollView>(null);
 
@@ -36,11 +36,11 @@ export const Home = ({navigation}: {navigation: any}) => {
           <View style={styles.section}>
             <View style={[styles.shadowBox]}>
               <Text style={[styles.marginBottomMd, styles.textLg]}>Menu</Text>
-              <TouchableOpacity
+              <Pressable
                 style={[styles.listItem, styles.learning]}
                 // ao clicar no botão, vai para a página de pesquisa
                 onPress={() =>
-                  navigation.navigate('Search', {name: 'Search'})
+                  navigation.navigate('Search', {name: 'Search', token: token})
                 }
               >
                 <Svg
@@ -79,11 +79,11 @@ export const Home = ({navigation}: {navigation: any}) => {
                     d="M9 5l7 7-7 7"
                   />
                 </Svg>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 style={[styles.listItem, styles.learning]}
                 onPress={() =>
-                  navigation.navigate('Prices', {name: 'Prices'})
+                  navigation.navigate('Prices', { name: 'Prices', token: token })
                 }
               >
                 <Svg
@@ -122,11 +122,11 @@ export const Home = ({navigation}: {navigation: any}) => {
                     d="M9 5l7 7-7 7"
                   />
                 </Svg>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 style={[styles.listItem, styles.learning]}
                 onPress={() =>
-                  navigation.navigate('Products', {name: 'Products'})
+                  navigation.navigate('Products', { name: 'Products', token: token })
                 }
               >
                 <Svg width={24} height={24} fill="#000000" viewBox="0 0 24 24">
@@ -159,11 +159,11 @@ export const Home = ({navigation}: {navigation: any}) => {
                     d="M9 5l7 7-7 7"
                   />
                 </Svg>
-              </TouchableOpacity>
-              <TouchableOpacity
+              </Pressable>
+              <Pressable
                 style={[styles.listItem, styles.learning]}
                 onPress={() =>
-                  navigation.navigate('Markets', {name: 'Markets'})
+                  navigation.navigate('Markets', { name: 'Markets', token: token})
                 }
               >
                 <Svg width={24} height={24} fill="#000000" viewBox="0 0 24 24">
@@ -196,100 +196,12 @@ export const Home = ({navigation}: {navigation: any}) => {
                     d="M9 5l7 7-7 7"
                   />
                 </Svg>
-              </TouchableOpacity>
-              {/* <TouchableOpacity
-                style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://nx.dev/react-tutorial/1-code-generation?utm_source=nx-project'
-                  )
-                }
-              >
-                <Svg
-                  width={24}
-                  height={24}
-                  stroke="#000000"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <Path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
-                  />
-                </Svg>
-                <View style={styles.listItemTextContainer}>
-                  <Text style={[styles.textMd]}>Interactive tutorials</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Create an app, step by step
-                  </Text>
-                </View>
-                <Svg
-                  width={18}
-                  height={18}
-                  stroke="#000000"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <Path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  ></Path>
-                </Svg>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.listItem, styles.learning]}
-                onPress={() =>
-                  Linking.openURL(
-                    'https://nxplaybook.com/?utm_source=nx-project'
-                  )
-                }
-              >
-                <Svg
-                  width={24}
-                  height={24}
-                  stroke="#000000"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <Path d="M12 14l9-5-9-5-9 5 9 5z"></Path>
-                  <Path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></Path>
-                  <Path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                  ></Path>
-                </Svg>
-                <View style={styles.listItemTextContainer}>
-                  <Text style={[styles.textMd]}>Video courses</Text>
-                  <Text style={[styles.text2XS, styles.textSubtle]}>
-                    Nx custom courses
-                  </Text>
-                </View>
-                <Svg
-                  width={18}
-                  height={18}
-                  stroke="#000000"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <Path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 5l7 7-7 7"
-                  ></Path>
-                </Svg>
-              </TouchableOpacity> */}
+              </Pressable>
             </View>
           </View>
 
           <View style={styles.section}>
-            <TouchableOpacity
+            <Pressable
               onPress={() => Linking.openURL('https://github.com/WDelesposti')}
             >
               <View style={[styles.listItem, styles.shadowBox]}>
@@ -311,7 +223,7 @@ export const Home = ({navigation}: {navigation: any}) => {
                   </Text>
                 </View>
               </View>
-            </TouchableOpacity>
+            </Pressable>
           </View>
 
           <View

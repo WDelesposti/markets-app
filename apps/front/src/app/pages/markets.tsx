@@ -4,8 +4,12 @@ import axios from 'axios';
 
 const API_URL = process.env.API_URL || 'http://localhost:3000';
 
-const Markets = () => {
+const Markets = (navigation: any) => {
   const [inputValue, setInputValue] = useState('');
+  const token = navigation.route.params.token;
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
 
   const handlePost = () => {
     const apiUrl = `${API_URL}/markets`;
@@ -14,7 +18,7 @@ const Markets = () => {
     };
 
     axios
-      .post(apiUrl, postData)
+      .post(apiUrl, postData, config)
       .then(() => {
         alert('Dados enviados com sucesso!');
       })
