@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js",
+      "src": "dist/apps/market-service/main.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "./apps/market-service/src/main.ts",
+      "dest": "apps/market-service/src/main.ts",
       "methods": [
         "GET",
         "POST",
