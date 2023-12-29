@@ -5,23 +5,34 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "target": "node",
-        "compiler": "tsc",
+        "platform": "node",
         "outputPath": "dist/apps/market-service",
+        "format": ["cjs"],
+        "bundle": false,
         "main": "apps/market-service/src/main.ts",
         "tsConfig": "apps/market-service/tsconfig.app.json",
-        "isolatedConfig": true,
-        "webpackConfig": "apps/market-service/webpack.config.js"
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
       },
       "configurations": {
         "development": {},
-        "production": {}
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
       }
     },
     "serve": {
