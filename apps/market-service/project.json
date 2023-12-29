@@ -21,7 +21,7 @@
       },
       "configurations": {
         "development": {
-          "scripts": ["prisma generate --schema=./apps/market-service/prisma/schema.prisma"]
+          "scripts": ["prisma generate --schema=./prisma/schema.prisma"]
         },
         "production": {}
       }
