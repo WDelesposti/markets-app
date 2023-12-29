@@ -2,7 +2,9 @@
   "name": "@market/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build --output public"
+  },
   "private": true,
   "dependencies": {
     "@expo/metro-config": "~0.10.7",
