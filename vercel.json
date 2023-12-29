@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "./dist/apps/market-service/main.js",
+      "dest": "./apps/market-service/src/main.ts",
       "methods": [
         "GET",
         "POST",
