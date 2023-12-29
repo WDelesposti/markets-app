@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "nx build --output public",
-    "postinstall": "prisma generate --schema=./apps/market-service/prisma/schema.prisma"
+    "postinstall": "prisma migrate deploy --schema=./apps/market-service/prisma/schema.prisma"
   },
   "private": true,
   "dependencies": {
