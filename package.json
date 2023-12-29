@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx build --output public"
+    "build": "nx build --output public",
+    "postinstall": "prisma generate --schema=./apps/market-service/prisma/schema.prisma"
   },
   "private": true,
   "dependencies": {
