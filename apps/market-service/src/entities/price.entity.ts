@@ -1,4 +1,4 @@
-import { Price } from '@prisma/client';
+import { Price } from '../../node_modules/.prisma/client';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PriceEntity implements Price {
