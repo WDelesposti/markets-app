@@ -20,7 +20,9 @@
         "webpackConfig": "apps/market-service/webpack.config.js"
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "scripts": ["prisma generate --schema=./apps/market-service/prisma/schema.prisma"]
+        },
         "production": {}
       }
     },
