@@ -36,7 +36,7 @@ export class PriceService {
 
     const result = prices.map((price) => ({
       ...price,
-      marketName: marketMap.get(price.marketId)?.name || undefined,
+      marketName: (marketMap.get(price.marketId) as { name?: string } | undefined)?.name || null,
     }));
 
     return result;
