@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
@@ -8,7 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:docker@localhost:5432/postgres?schema=public"
 }
 
 model Market {
@@ -20,10 +17,16 @@ model Product {
   id          Int    @id @default(autoincrement())
   name        String
   brand       String
+  categoryId  Int
   size        Float
   measurement String
 
   @@unique([name, brand])
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
 }
 
 model Price {
@@ -43,10 +46,8 @@ model ShoppingList {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-
+  id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-
-  name String
+  name     String
 }
