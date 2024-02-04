@@ -7,6 +7,9 @@
     "postinstall": "prisma migrate deploy --schema=./apps/market-service/prisma/schema.prisma && prisma generate --schema=./apps/market-service/prisma/schema.prisma"
   },
   "private": true,
+  "prisma": {
+    "seed": "ts-node apps/market-service/prisma/seeds/seed.ts"
+  },
   "dependencies": {
     "@expo/metro-config": "~0.10.7",
     "@nestjs/common": "^10.0.2",
