@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "name": "LIMAO TAITI",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 2,
+    "name": "LIMAO SICILIANO",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 3,
+    "name": "LARANJA PERA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 4,
+    "name": "LARANJA BAHIA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 5,
+    "name": "LARANJA LIMA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 6,
+    "name": "CEBOLA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 7,
+    "name": "ALHO",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 8,
+    "name": "BATATA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 9,
+    "name": "CENOURA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 10,
+    "name": "BANANA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 11,
+    "name": "MACA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 12,
+    "name": "PERA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 13,
+    "name": "UVA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 14,
+    "name": "MELANCIA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 15,
+    "name": "MELAO",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 16,
+    "name": "MORANGO",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 17,
+    "name": "ABACAXI",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 18,
+    "name": "MANGA",
+    "category": "HORTIFRUTI"
+  },
+  {
+    "id": 19,
+    "name": "MAMAO",
+    "category": "HORTIFRUTI"
+  }  
+]
